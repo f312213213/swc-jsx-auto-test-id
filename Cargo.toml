@@ -1,0 +1,25 @@
+[package]
+name = "swc-react-auto-test-id"
+version = "0.1.0"
+description = "A SWC plugin that automatically adds test IDs to React components"
+authors = ["david <me@chiendavid.com>"]
+license = "MIT"
+keywords = ["swc-plugin", "react", "testing"]
+repository = "https://github.com/f312213213/swc-react-auto-test-id"
+documentation = "https://github.com/f312213213/swc-react-auto-test-id"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+swc_core = { version = "0.101.7", features = ["ecma_plugin_transform", "__parser"] }
+
+[dev-dependencies]
+testing = "0.39.0"
+
+# .cargo/config defines few alias to build plugin.
+# cargo build-wasi generates wasm-wasi32 binary
+# cargo build-wasm32 generates wasm32-unknown-unknown binary.

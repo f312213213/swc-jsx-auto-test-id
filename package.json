@@ -1,0 +1,18 @@
+{
+    "name": "swc-react-auto-test-id",
+    "version": "0.1.0",
+    "description": "A SWC plugin that automatically adds test IDs to React components",
+    "author": "david <me@chiendavid.com>",
+    "license": "MIT",
+    "keywords": ["swc-plugin", "react", "testing"],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/f312213213/swc-react-auto-test-id.git"
+    },
+    "main": "swc_react_auto_test_id.wasm",
+    "files": ["swc_react_auto_test_id.wasm"],
+    "scripts": {
+        "prepublishOnly": "cargo build-wasi --release && cp target/wasm32-wasi/release/swc_react_auto_test_id.wasm ."
+    },
+    "preferUnplugged": true
+}
