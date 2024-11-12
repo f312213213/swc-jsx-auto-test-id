@@ -1245,7 +1245,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "swc-react-auto-test-id"
+name = "swc-jsx-auto-test-id"
 version = "0.1.0"
 dependencies = [
  "serde",

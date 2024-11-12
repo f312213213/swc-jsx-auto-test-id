@@ -1,15 +1,14 @@
 name: Publish
 on:
   push:
-    tags:
-      - 'v*'
+    branches:
+      - main
 
 jobs:
   publish:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-
       - name: Install Rust
         uses: actions-rs/toolchain@v1
         with:
@@ -28,7 +27,7 @@ jobs:
 
       - name: Publish to npm
         run: |
-          cp target/wasm32-wasi/release/swc_react_auto_test_id.wasm .
+          cp target/wasm32-wasi/release/swc_jsx_auto_test_id.wasm .
           npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

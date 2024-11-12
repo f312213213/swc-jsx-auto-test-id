@@ -1,11 +1,11 @@
-# swc-react-auto-test-id
+# swc-jsx-auto-test-id
 
 A SWC plugin that automatically adds test IDs to React components based on their parent function names.
 
 ## Installation 
 
 ```bash
-npm install --save-dev swc-react-auto-test-id
+npm install --save-dev swc-jsx-auto-test-id
 ```
 
 ## Usage
@@ -18,7 +18,7 @@ Add the plugin to your `.swcrc`:
         experimental: {
             plugins: [
               [
-                'swc-react-auto-test-id',
+                'swc-jsx-auto-test-id',
                 {
                   attribute_name: 'data-swc-test-id',
                 },
