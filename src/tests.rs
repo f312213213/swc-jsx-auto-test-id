@@ -2,10 +2,11 @@
 mod tests {
     use swc_core::ecma::{transforms::testing::test_inline, visit::as_folder};
     use super::super::visitor::TransformVisitor;
+    use swc_core::ecma::parser::{Syntax, TsSyntax};
 
     test_inline!(
-        swc_core::ecma::parser::Syntax::Es(swc_core::ecma::parser::EsSyntax {
-            jsx: true,
+        Syntax::Typescript(TsSyntax {
+            tsx: true,
             ..Default::default()
         }),
         |_| as_folder(TransformVisitor::new(Some("data-testid".to_string()))),
@@ -19,8 +20,8 @@ mod tests {
     );
 
     test_inline!(
-        swc_core::ecma::parser::Syntax::Es(swc_core::ecma::parser::EsSyntax {
-            jsx: true,
+        Syntax::Typescript(TsSyntax {
+            tsx: true,
             ..Default::default()
         }),
         |_| as_folder(TransformVisitor::new(Some("data-testid".to_string()))),
@@ -40,8 +41,8 @@ mod tests {
     );
 
     test_inline!(
-        swc_core::ecma::parser::Syntax::Es(swc_core::ecma::parser::EsSyntax {
-            jsx: true,
+        Syntax::Typescript(TsSyntax {
+            tsx: true,
             ..Default::default()
         }),
         |_| as_folder(TransformVisitor::new(Some("data-testid".to_string()))),
@@ -77,8 +78,8 @@ mod tests {
     );
 
     test_inline!(
-        swc_core::ecma::parser::Syntax::Es(swc_core::ecma::parser::EsSyntax {
-            jsx: true,
+        Syntax::Typescript(TsSyntax {
+            tsx: true,
             ..Default::default()
         }),
         |_| as_folder(TransformVisitor::new(Some("data-testid".to_string()))),
@@ -110,8 +111,8 @@ mod tests {
     );
 
     test_inline!(
-        swc_core::ecma::parser::Syntax::Es(swc_core::ecma::parser::EsSyntax {
-            jsx: true,
+        Syntax::Typescript(TsSyntax {
+            tsx: true,
             ..Default::default()
         }),
         |_| as_folder(TransformVisitor::new(Some("data-testid".to_string()))),
@@ -139,8 +140,8 @@ mod tests {
     );
 
     test_inline!(
-        swc_core::ecma::parser::Syntax::Es(swc_core::ecma::parser::EsSyntax {
-            jsx: true,
+        Syntax::Typescript(TsSyntax {
+            tsx: true,
             ..Default::default()
         }),
         |_| as_folder(TransformVisitor::new(Some("data-testid".to_string()))),
@@ -158,8 +159,8 @@ mod tests {
     );
 
     test_inline!(
-        swc_core::ecma::parser::Syntax::Es(swc_core::ecma::parser::EsSyntax {
-            jsx: true,
+        Syntax::Typescript(TsSyntax {
+            tsx: true,
             ..Default::default()
         }),
         |_| as_folder(TransformVisitor::new(Some("data-testid".to_string()))),
@@ -183,8 +184,8 @@ mod tests {
     );
 
     test_inline!(
-        swc_core::ecma::parser::Syntax::Es(swc_core::ecma::parser::EsSyntax {
-            jsx: true,
+        Syntax::Typescript(TsSyntax {
+            tsx: true,
             ..Default::default()
         }),
         |_| as_folder(TransformVisitor::new(Some("data-test-id".to_string()))),
@@ -194,6 +195,83 @@ mod tests {
         }"#,
         r#"function TestComponent() {
             return <Card data-test-id="TestComponent">Test</Card>;
+        }"#
+    );
+
+    test_inline!(
+        Syntax::Typescript(TsSyntax {
+            tsx: true,
+            ..Default::default()
+        }),
+        |_| as_folder(TransformVisitor::new(Some("data-testid".to_string()))),
+        arrow_function_component,
+        r#"const Sidebar = () => {
+            return (
+                <Card>
+                    <Button>Click me</Button>
+                </Card>
+            );
+        }"#,
+        r#"const Sidebar = () => {
+            return <Card data-testid="Sidebar">
+                    <Button>Click me</Button>
+                </Card>;
+        }"#
+    );
+
+    test_inline!(
+        Syntax::Typescript(TsSyntax {
+            tsx: true,
+            ..Default::default()
+        }),
+        |_| as_folder(TransformVisitor::new(Some("data-testid".to_string()))),
+        arrow_function_with_props,
+        r#"const UserCard = ({ name, role }: { name: string; role: string }) => {
+            return (
+                <Card>
+                    <Avatar />
+                    <UserInfo>
+                        <Name>{name}</Name>
+                        <Role>{role}</Role>
+                    </UserInfo>
+                </Card>
+            );
+        }"#,
+        r#"const UserCard = ({ name, role }: { name: string; role: string }) => {
+            return <Card data-testid="UserCard">
+                    <Avatar />
+                    <UserInfo>
+                        <Name>{name}</Name>
+                        <Role>{role}</Role>
+                    </UserInfo>
+                </Card>;
+        }"#
+    );
+
+    test_inline!(
+        Syntax::Typescript(TsSyntax {
+            tsx: true,
+            ..Default::default()
+        }),
+        |_| as_folder(TransformVisitor::new(Some("data-testid".to_string()))),
+        mixed_function_types,
+        r#"function OuterComponent() {
+            const InnerComponent = () => {
+                return <Button>Click</Button>;
+            };
+            return (
+                <Card>
+                    <InnerComponent />
+                </Card>
+            );
+        }"#,
+        r#"function OuterComponent() {
+            const InnerComponent = () => {
+                return <Button data-testid="InnerComponent">Click</Button>;
+            };
+            return <Card data-testid="OuterComponent">
+                    <InnerComponent />
+                </Card>;
         }"#
     );
 
