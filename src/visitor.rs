@@ -43,13 +43,17 @@ impl VisitMut for TransformVisitor {
         let prev_function_name = self.current_function_name.clone();
         if let Some(decl) = var_decl.decls.first() {
             if let Some(init) = &decl.init {
-                if let swc_core::ecma::ast::Expr::Arrow(_) = &**init {
-                    if let swc_core::ecma::ast::Pat::Ident(ident) = &decl.name {
-                        if ident.id.sym.chars().next().map_or(false, |c| c.is_uppercase()) {
-                            self.current_function_name = Some(ident.id.sym.to_string());
-                            self.nesting_level = 0;  // Reset nesting level for new function
+                match &**init {
+                    swc_core::ecma::ast::Expr::Arrow(_) |
+                    swc_core::ecma::ast::Expr::Call(_) => {
+                        if let swc_core::ecma::ast::Pat::Ident(ident) = &decl.name {
+                            if ident.id.sym.chars().next().map_or(false, |c| c.is_uppercase()) {
+                                self.current_function_name = Some(ident.id.sym.to_string());
+                                self.nesting_level = 0;
+                            }
                         }
                     }
+                    _ => {}
                 }
             }
         }

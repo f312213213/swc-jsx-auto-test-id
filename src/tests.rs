@@ -286,4 +286,58 @@ mod tests {
         let visitor = TransformVisitor::new(Some("data-testid".to_string()));
         assert_eq!(visitor.get_attribute_name(), "data-testid");
     }
+
+    test_inline!(
+        Syntax::Typescript(TsSyntax {
+            tsx: true,
+            ..Default::default()
+        }),
+        |_| as_folder(TransformVisitor::new(Some("data-testid".to_string()))),
+        memoed_component,
+        r#"export const Layout = memo(({ children }: LayoutProps) => {
+            return (
+                <div>
+                    <Navbar />
+                    <Container>
+                        {children}
+                    </Container>
+                </div>
+            );
+        });"#,
+        r#"export const Layout = memo(({ children }: LayoutProps) => {
+            return <div data-testid="Layout">
+                    <Navbar />
+                    <Container>
+                        {children}
+                    </Container>
+                </div>;
+        });"#
+    );
+
+    test_inline!(
+        Syntax::Typescript(TsSyntax {
+            tsx: true,
+            ..Default::default()
+        }),
+        |_| as_folder(TransformVisitor::new(Some("data-testid".to_string()))),
+        memoed_component_with_type_annotation,
+        r#"export const Layout: React.FC<LayoutProps> = memo(({ children }) => {
+            return (
+                <div>
+                    <Navbar />
+                    <Container>
+                        {children}
+                    </Container>
+                </div>
+            );
+        });"#,
+        r#"export const Layout: React.FC<LayoutProps> = memo(({ children }) => {
+            return <div data-testid="Layout">
+                    <Navbar />
+                    <Container>
+                        {children}
+                    </Container>
+                </div>;
+        });"#
+    );
 } 
