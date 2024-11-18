@@ -2,4 +2,5 @@
 rustflags = ["-C", "target-feature=+bulk-memory"]
 
 [alias]
-build-wasi = ["build", "--target", "wasm32-wasi"] 
+build-wasip1 = "build --target wasm32-wasip1"
+build-wasm32 = "build --target wasm32-unknown-unknown"

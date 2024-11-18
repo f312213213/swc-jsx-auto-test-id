@@ -1,18 +1,25 @@
 {
     "name": "swc-jsx-auto-test-id",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "A SWC plugin that automatically adds test IDs to jsx components",
     "author": "David Chien <me@chiendavid.com>",
     "license": "MIT",
-    "keywords": ["swc-plugin", "react", "testing"],
+    "keywords": [
+        "swc-plugin",
+        "react",
+        "testing"
+    ],
     "repository": {
         "type": "git",
         "url": "https://github.com/f312213213/swc-jsx-auto-test-id.git"
     },
     "main": "swc_jsx_auto_test_id.wasm",
-    "files": ["swc_jsx_auto_test_id.wasm"],
+    "files": [
+        "swc_jsx_auto_test_id.wasm"
+    ],
     "scripts": {
-        "prepublishOnly": "cargo build-wasi --release && cp target/wasm32-wasi/release/swc_jsx_auto_test_id.wasm ."
+        "prepublishOnly": "cargo build-wasip1 --release && cp target/wasm32-wasip1/release/swc_jsx_auto_test_id.wasm ."
     },
-    "preferUnplugged": true
+    "preferUnplugged": true,
+    "packageManager": "pnpm@9.12.2+sha512.22721b3a11f81661ae1ec68ce1a7b879425a1ca5b991c975b074ac220b187ce56c708fe5db69f4c962c989452eee76c82877f4ee80f474cebd61ee13461b6228"
 }
