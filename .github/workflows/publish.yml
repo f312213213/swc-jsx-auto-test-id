@@ -14,7 +14,7 @@ jobs:
         with:
           profile: minimal
           toolchain: stable
-          target: wasm32-wasi
+          target: wasm32-wasip1
 
       - name: Build
         run: cargo build-wasip1 --release
