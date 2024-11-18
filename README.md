@@ -12,7 +12,7 @@ npm install --save-dev swc-jsx-auto-test-id
 
 Add the plugin to your `.swcrc`:
 
-```json
+```
 {
     jsc: {
         experimental: {

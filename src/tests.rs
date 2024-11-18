@@ -1,6 +1,6 @@
 #[cfg(test)]
 mod tests {
-    use swc_core::ecma::{transforms::testing::test_inline, visit::as_folder};
+    use swc_core::ecma::transforms::testing::test_inline;
     use super::super::visitor::TransformVisitor;
     use swc_core::ecma::parser::{Syntax, TsSyntax};
 
@@ -9,7 +9,7 @@ mod tests {
             tsx: true,
             ..Default::default()
         }),
-        |_| as_folder(TransformVisitor::new(Some("data-testid".to_string()))),
+        |_| TransformVisitor::new(Some("data-testid".to_string())),
         basic_function_name,
         r#"function GoodButton() {
             return <Button>Click me</Button>;
@@ -24,7 +24,7 @@ mod tests {
             tsx: true,
             ..Default::default()
         }),
-        |_| as_folder(TransformVisitor::new(Some("data-testid".to_string()))),
+        |_| TransformVisitor::new(Some("data-testid".to_string())),
         nested_components,
         r#"function CardContainer() {
             return (
@@ -45,7 +45,7 @@ mod tests {
             tsx: true,
             ..Default::default()
         }),
-        |_| as_folder(TransformVisitor::new(Some("data-testid".to_string()))),
+        |_| TransformVisitor::new(Some("data-testid".to_string())),
         complex_nested_structure,
         r#"function DashboardLayout() {
             return (
@@ -82,7 +82,7 @@ mod tests {
             tsx: true,
             ..Default::default()
         }),
-        |_| as_folder(TransformVisitor::new(Some("data-testid".to_string()))),
+        |_| TransformVisitor::new(Some("data-testid".to_string())),
         mixed_html_and_components,
         r#"function UserProfile() {
             return (
@@ -115,7 +115,7 @@ mod tests {
             tsx: true,
             ..Default::default()
         }),
-        |_| as_folder(TransformVisitor::new(Some("data-testid".to_string()))),
+        |_| TransformVisitor::new(Some("data-testid".to_string())),
         multiple_root_components,
         r#"function TabPanel() {
             return (
@@ -144,7 +144,7 @@ mod tests {
             tsx: true,
             ..Default::default()
         }),
-        |_| as_folder(TransformVisitor::new(Some("data-testid".to_string()))),
+        |_| TransformVisitor::new(Some("data-testid".to_string())),
         preserve_existing_custom_attr,
         r#"function CustomCard() {
             return <Card data-testid="my-special-card">
@@ -163,7 +163,7 @@ mod tests {
             tsx: true,
             ..Default::default()
         }),
-        |_| as_folder(TransformVisitor::new(Some("data-testid".to_string()))),
+        |_| TransformVisitor::new(Some("data-testid".to_string())),
         with_conditional_rendering,
         r#"function ConditionalComponent({ isVisible }) {
             return (
@@ -188,7 +188,7 @@ mod tests {
             tsx: true,
             ..Default::default()
         }),
-        |_| as_folder(TransformVisitor::new(Some("data-test-id".to_string()))),
+        |_| TransformVisitor::new(Some("data-test-id".to_string())),
         different_attribute_name,
         r#"function TestComponent() {
             return <Card>Test</Card>;
@@ -203,7 +203,7 @@ mod tests {
             tsx: true,
             ..Default::default()
         }),
-        |_| as_folder(TransformVisitor::new(Some("data-testid".to_string()))),
+        |_| TransformVisitor::new(Some("data-testid".to_string())),
         arrow_function_component,
         r#"const Sidebar = () => {
             return (
@@ -224,7 +224,7 @@ mod tests {
             tsx: true,
             ..Default::default()
         }),
-        |_| as_folder(TransformVisitor::new(Some("data-testid".to_string()))),
+        |_| TransformVisitor::new(Some("data-testid".to_string())),
         arrow_function_with_props,
         r#"const UserCard = ({ name, role }: { name: string; role: string }) => {
             return (
@@ -253,7 +253,7 @@ mod tests {
             tsx: true,
             ..Default::default()
         }),
-        |_| as_folder(TransformVisitor::new(Some("data-testid".to_string()))),
+        |_| TransformVisitor::new(Some("data-testid".to_string())),
         mixed_function_types,
         r#"function OuterComponent() {
             const InnerComponent = () => {
@@ -292,7 +292,7 @@ mod tests {
             tsx: true,
             ..Default::default()
         }),
-        |_| as_folder(TransformVisitor::new(Some("data-testid".to_string()))),
+        |_| TransformVisitor::new(Some("data-testid".to_string())),
         memoed_component,
         r#"export const Layout = memo(({ children }: LayoutProps) => {
             return (
@@ -319,7 +319,7 @@ mod tests {
             tsx: true,
             ..Default::default()
         }),
-        |_| as_folder(TransformVisitor::new(Some("data-testid".to_string()))),
+        |_| TransformVisitor::new(Some("data-testid".to_string())),
         memoed_component_with_type_annotation,
         r#"export const Layout: React.FC<LayoutProps> = memo(({ children }) => {
             return (

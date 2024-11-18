@@ -1,6 +1,6 @@
 use swc_core::ecma::{
-    ast::{JSXAttr, JSXAttrName, JSXAttrOrSpread, JSXElementName, Str},
-    visit::{VisitMut, VisitMutWith},
+    ast::{JSXAttr, JSXAttrName, JSXAttrOrSpread, JSXElementName, Str, Pass},
+    visit::{VisitMut, VisitMutWith, Fold, FoldWith},
 };
 use swc_core::common::SyntaxContext;
 
@@ -23,6 +23,7 @@ impl TransformVisitor {
         }
     }
 
+    #[cfg(test)]
     pub fn get_attribute_name(&self) -> &str {
         &self.attribute_name
     }
@@ -124,5 +125,17 @@ impl VisitMut for TransformVisitor {
         self.in_fragment = prev_in_fragment;
         self.found_first_in_fragment = prev_found_first;
         self.nesting_level = prev_nesting;
+    }
+}
+
+impl Fold for TransformVisitor {
+    fn fold_module(&mut self, module: swc_core::ecma::ast::Module) -> swc_core::ecma::ast::Module {
+        module.fold_children_with(self)
+    }
+}
+
+impl Pass for TransformVisitor {
+    fn process(&mut self, program: &mut swc_core::ecma::ast::Program) {
+        program.visit_mut_with(self);
     }
 } 
