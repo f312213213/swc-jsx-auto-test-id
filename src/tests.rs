@@ -131,8 +131,8 @@ mod tests {
         r#"function TabPanel() {
             return <>
                     <Tab data-testid="TabPanel">First</Tab>
-                    <Tab>Second</Tab>
-                    <Panel>
+                    <Tab data-testid="TabPanel">Second</Tab>
+                    <Panel data-testid="TabPanel">
                         <Content>Tab content</Content>
                     </Panel>
                 </>;

@@ -1,6 +1,6 @@
 {
     "name": "swc-jsx-auto-test-id",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "description": "A SWC plugin that automatically adds test IDs to jsx components",
     "author": "David Chien <me@chiendavid.com>",
     "license": "MIT",

@@ -1,6 +1,6 @@
 [package]
 name = "swc-jsx-auto-test-id"
-version = "0.1.0"
+version = "1.0.2"
 description = "A SWC plugin that automatically adds test IDs to React components"
 authors = ["David Chien <me@chiendavid.com>"]
 license = "MIT"
@@ -9,8 +9,12 @@ repository = "https://github.com/f312213213/swc-jsx-auto-test-id"
 documentation = "https://github.com/f312213213/swc-jsx-auto-test-id"
 edition = "2021"
 
+
 [lib]
-crate-type = ["cdylib"]
+crate-type = ["cdylib", "rlib"]
+
+[profile.release]
+lto = true
 
 [dependencies]
 serde = { version = "1.0", features = ["derive"] }
